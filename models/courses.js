@@ -61,8 +61,8 @@ class Course {
     }
 
     static async getById(id) {
-        const course = await Course.getAll()
-        return course.find(item => item.id == id)
+        const courses = await Course.getAll()
+        return courses.find(item => item.id === id)
     }
 
 }

@@ -11,13 +11,13 @@ router.get('/courses', async (req, res) => {
     })
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id',  async (req, res) => {
 
     const course = await Course.getById(req.params.id)
+    console.log(course)
 
-    res.render('courses', {
-        title: 'Lol',
-        id: course
+    res.render('course', {
+        course
     })
 })
 
