@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars')
 const mainRoutes = require('./routes/main')
 const addRoutes = require('./routes/add')
 const coursesRoutes = require('./routes/courses')
+const basketRoutes = require('./routes/basket')
 
 const hbs = exphbs.create({
     defaultLayout: 'main',
@@ -18,12 +19,13 @@ app.set('views', 'views')
 
 
 //use
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended: true}))
 
 app.use(mainRoutes)
 app.use(addRoutes)
 app.use(coursesRoutes)
+app.use(basketRoutes)
 
 const PORT = 4000
 
