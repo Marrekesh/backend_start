@@ -3,7 +3,7 @@ const Course = require('../models/courses')
 const router = Router()
 
 router.get('/courses', async (req, res) => {
-    const courses = await Course.getAll()
+    const courses = await Course.find() // find, static mongoose method for get all data
     res.render('courses', {
         title: 'courses',
         isCourses: true,
@@ -12,7 +12,7 @@ router.get('/courses', async (req, res) => {
 })
 
 router.get('/courses/:id',  async (req, res) => {
-    const course = await Course.getById(req.params.id)
+    const course = await Course.findById(req.params.id)
     res.render('course', {
         title: `${course.title}`,
         course

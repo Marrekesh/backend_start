@@ -2,11 +2,16 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars')
+const mongoose = require('mongoose')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 //routes
 const mainRoutes = require('./routes/main')
 const addRoutes = require('./routes/add')
 const coursesRoutes = require('./routes/courses')
 const basketRoutes = require('./routes/basket')
+
+
+
 
 const hbs = exphbs.create({
     defaultLayout: 'main',
@@ -29,6 +34,25 @@ app.use(basketRoutes)
 
 const PORT = 4000
 
-app.listen(PORT, () => {
-    console.log('server ready')
-})
+async function start() {
+
+    try {
+        const toket = `mongodb+srv://Marrakesh1:123Sypthon@cluster0.nfcks.mongodb.net/shop` //`mongodb+srv://Marrakesh1:123Sypthon@cluster0.nfcks.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+        await mongoose.connect(toket, {useNewUrlParser: true})
+        app.listen(PORT, () => {
+            console.log('server ready')
+        })
+
+    } catch(e) {
+        console.log(e)
+    }
+
+
+}
+
+start()
+
+
+
+
+
