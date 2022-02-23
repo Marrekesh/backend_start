@@ -4,6 +4,7 @@ const app = express();
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+const Handlebars = require('handlebars')
 //routes
 const mainRoutes = require('./routes/main')
 const addRoutes = require('./routes/add')
@@ -15,7 +16,8 @@ const basketRoutes = require('./routes/basket')
 
 const hbs = exphbs.create({
     defaultLayout: 'main',
-    extname: 'hbs'
+    extname: 'hbs',
+    handlebars: allowInsecurePrototypeAccess(Handlebars)
 })
 
 app.engine('hbs', hbs.engine)
@@ -37,8 +39,11 @@ const PORT = 4000
 async function start() {
 
     try {
-        const toket = `mongodb+srv://Marrakesh1:123Sypthon@cluster0.nfcks.mongodb.net/shop` //`mongodb+srv://Marrakesh1:123Sypthon@cluster0.nfcks.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
-        await mongoose.connect(toket, {useNewUrlParser: true})
+        const toket =  `mongodb+srv://Marrakesh1:123Sypthon@cluster0.nfcks.mongodb.net/shop` //`mongodb+srv://Marrakesh1:123Sypthon@cluster0.nfcks.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+        await mongoose.connect(toket, {
+            useNewUrlParser: true,
+            // useFindAndModify: false
+        })
         app.listen(PORT, () => {
             console.log('server ready')
         })

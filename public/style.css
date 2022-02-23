@@ -7,3 +7,16 @@ nav {
     align-items: center;
     justify-content: space-between;
 }
+
+.group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ml {
+    margin-left: 10px;
+}
+
+.ml.red {
+    background-color: red;
+}
